@@ -326,7 +326,7 @@ Only include packages actually required by the released scripts.
 ## Dataset organization
 
 <p align="center">
-  <img src="figures/dataset_structure.png" width="850">
+  <img src="figures/Picture2aaaaaaaa.jpg" width="850">
 </p>
 
 <p align="center">
