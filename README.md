@@ -117,8 +117,6 @@ Multimodal_locomotion_dataset/
     └── file_naming.md
 ```
 
-Change the filenames above to match the actual released scripts.
-
 ---
 
 ## Dataset organization
@@ -137,7 +135,7 @@ Subject 01/
 └── S1_GaitEvents.csv
 ```
 
-The same structure is used for Subjects 02–15.
+The same structure is used for Subjects 01–15.
 
 ---
 
