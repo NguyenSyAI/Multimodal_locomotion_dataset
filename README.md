@@ -300,7 +300,7 @@ Only include packages actually required by the released scripts.
 ## Wearable sensor configuration
 
 <p align="center">
-  <img src="figures/sensor_setup.png" width="650">
+  <img src="figures/Picture1aaaaaaaaaa.jpg" width="650">
 </p>
 
 <p align="center">
@@ -334,21 +334,6 @@ Only include packages actually required by the released scripts.
   Subject-level directory structure and multimodal file-naming convention.
   </em>
 </p>
-
-
-## Dataset organization
-
-<p align="center">
-  <img src="figures/dataset_structure.png" width="850">
-</p>
-
-<p align="center">
-  <em>
-  Subject-level directory structure and multimodal file-naming convention.
-  </em>
-</p>
-
-
 
 
 
