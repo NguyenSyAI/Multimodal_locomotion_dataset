@@ -77,8 +77,6 @@ Participant availability varies by condition. Refer to the dataset manuscript an
 
 ## Repository structure
 
-Recommended code organization:
-
 ```text
 Multimodal_locomotion_dataset/
 │
@@ -88,25 +86,13 @@ Multimodal_locomotion_dataset/
 ├── .gitignore
 │
 ├── synchronization/
-│   ├── synchronize_video_views.py
-│   ├── segment_video_trials.py
-│   ├── segment_imu_trials.py
 │   └── align_imu_video.py
-│
-├── preprocessing/
-│   ├── imu_preprocessing.py
-│   ├── video_preprocessing.py
-│   └── dataset_loader.py
 │
 ├── benchmark/
 │   ├── model.py
 │   ├── train.py
 │   ├── evaluate.py
 │   └── loso_splits.py
-│
-├── examples/
-│   ├── example_load_trial.py
-│   └── example_plot_synchronized_data.py
 │
 ├── figures/
 │   ├── sensor_setup.png
@@ -217,23 +203,6 @@ The processing workflow includes:
 
 The resulting IMU files include a `video_sec` value for each IMU sample, allowing direct temporal association with synchronized video.
 
-### Synchronization code
-
-Place the synchronization scripts in:
-
-```text
-synchronization/
-```
-
-Recommended entry point:
-
-```bash
-python synchronization/align_imu_video.py
-```
-
-Update this command after finalizing the actual script names and arguments.
-
----
 
 ## Baseline benchmark
 
@@ -348,8 +317,6 @@ Repository figures can be displayed directly in this README.
 <p align="center">
   <img src="figures/dataset_structure.png" width="850">
 </p>
-
-Replace the filenames above with the final images you want to upload.
 
 ---
 
