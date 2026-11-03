@@ -398,7 +398,6 @@ The final citation and DOI will be added after publication.
 - **Zhaozheng Yin** — Stony Brook University
 - **Hwan Choi** — University of Central Florida
 
-Additional contributor roles can be added after the final CRediT author statement is confirmed.
 
 ---
 
