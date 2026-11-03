@@ -333,19 +333,23 @@ Only include packages actually required by the released scripts.
 
 Repository figures can be displayed directly in this README.
 
-```markdown
 ## Wearable sensor configuration
 
-![Wearable sensor configuration](figures/sensor_setup.png)
+<p align="center">
+  <img src="figures/sensor_setup.png" width="700">
+</p>
 
 ## Representative terrain environments
 
-![Representative terrain environments](figures/terrain_examples.png)
+<p align="center">
+  <img src="figures/terrain_examples.png" width="850">
+</p>
 
 ## Dataset organization
 
-![Dataset organization](figures/dataset_structure.png)
-```
+<p align="center">
+  <img src="figures/dataset_structure.png" width="850">
+</p>
 
 Replace the filenames above with the final images you want to upload.
 
