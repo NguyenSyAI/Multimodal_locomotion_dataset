@@ -296,29 +296,8 @@ Only include packages actually required by the released scripts.
 
 ---
 
-## Figures
-
-Repository figures can be displayed directly in this README.
 
 ## Wearable sensor configuration
-
-<p align="center">
-  <img src="figures/sensor_setup.png" width="700">
-</p>
-
-## Representative terrain environments
-
-<p align="center">
-  <img src="figures/terrain_examples.png" width="850">
-</p>
-
-## Dataset organization
-
-<p align="center">
-  <img src="figures/dataset_structure.png" width="850">
-</p>
-
----
 
 <p align="center">
   <img src="figures/sensor_setup.png" width="650">
@@ -355,6 +334,23 @@ Repository figures can be displayed directly in this README.
   Subject-level directory structure and multimodal file-naming convention.
   </em>
 </p>
+
+
+## Dataset organization
+
+<p align="center">
+  <img src="figures/dataset_structure.png" width="850">
+</p>
+
+<p align="center">
+  <em>
+  Subject-level directory structure and multimodal file-naming convention.
+  </em>
+</p>
+
+
+
+
 
 
 ## Reproducibility
