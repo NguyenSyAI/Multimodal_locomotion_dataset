@@ -414,7 +414,8 @@ The dataset license is defined separately in the Figshare release.
 
 For questions regarding the dataset, please contact:
 
-**Hwan Choi**  
+**SY NGUYEN**  
 Department of Mechanical and Aerospace Engineering  
 University of Central Florida  
-Email: hwan.choi@ucf.edu
+Email: sy.nguyen@ucf.edu
+Email: nguyenvansy240@gmail.com
