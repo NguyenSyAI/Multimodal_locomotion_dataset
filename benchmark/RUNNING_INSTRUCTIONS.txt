@@ -1,0 +1,165 @@
+UCF TERRAIN MULTI-TASK LOSO BASELINES
+=====================================
+
+1. EXPECTED PROJECT STRUCTURE
+-----------------------------
+Place this folder here:
+
+ucf/
+├── data/
+│   ├── Subject 1/
+│   ├── Subject 2/
+│   ├── ...
+│   └── Subject 24/
+└── code/
+    └── terrain_models/
+        └── multitask_baselines/
+            ├── config.py
+            ├── data.py
+            ├── models.py
+            ├── evaluation.py
+            ├── train.py
+            ├── run.py
+            └── requirements.txt
+
+No absolute /media/... path is used. Paths are inferred from this layout.
+
+2. CREATE / ACTIVATE THE CONDA ENVIRONMENT
+------------------------------------------
+conda create -n ucf_terrain python=3.10 -y
+conda activate ucf_terrain
+pip install -r requirements.txt
+
+If you already have the ucf_terrain environment:
+conda activate ucf_terrain
+pip install -r requirements.txt
+
+For CUDA-enabled PyTorch, install the PyTorch build appropriate for the
+collaborator's CUDA/driver first, then run the remaining requirements.
+
+3. GO TO THE CODE DIRECTORY
+---------------------------
+cd /path/to/ucf/code/terrain_models/multitask_baselines
+
+4. AVAILABLE BASELINES
+----------------------
+2imu             = two IMUs only
+1imu_shankcam    = one IMU + ShankCam
+1imu_chestcam    = one IMU + ChestCam
+
+5. PREPARE THE DATA CACHE
+-------------------------
+This step reads the synchronized CSV files, Signal_Index file, and videos
+when needed. It creates 200-row IMU windows with a 50-row step.
+
+Two IMUs:
+python run.py --baseline 2imu --mode prepare
+
+1 IMU + ShankCam:
+python run.py --baseline 1imu_shankcam --mode prepare
+
+1 IMU + ChestCam:
+python run.py --baseline 1imu_chestcam --mode prepare
+
+To rebuild an existing cache:
+python run.py --baseline 1imu_shankcam --mode prepare --overwrite-cache
+
+6. TRAIN ALL LOSO FOLDS
+-----------------------
+Two IMUs:
+python run.py --baseline 2imu --mode train
+
+1 IMU + ShankCam:
+python run.py --baseline 1imu_shankcam --mode train
+
+1 IMU + ChestCam:
+python run.py --baseline 1imu_chestcam --mode train
+
+7. PREPARE + TRAIN IN ONE COMMAND
+---------------------------------
+python run.py --baseline 2imu --mode all
+python run.py --baseline 1imu_shankcam --mode all
+python run.py --baseline 1imu_chestcam --mode all
+
+8. TEST ONE LOSO FOLD FIRST
+---------------------------
+Recommended before launching all folds:
+
+python run.py --baseline 2imu --mode train --test-subject 20 --epochs 2
+python run.py --baseline 1imu_shankcam --mode train --test-subject 20 --epochs 2
+python run.py --baseline 1imu_chestcam --mode train --test-subject 20 --epochs 2
+
+Then run the full experiment with the default 60 epochs.
+
+9. OPTIONAL ARGUMENTS
+---------------------
+--epochs N          maximum number of epochs
+--batch-size N      override the default batch size
+--num-workers N     DataLoader workers
+--test-subject N    run only one held-out subject
+--overwrite-cache   rebuild cached windows
+
+Examples:
+python run.py --baseline 2imu --mode train --epochs 60 --batch-size 256
+python run.py --baseline shank --mode train --test-subject 21
+
+10. LOSO PROTOCOL
+-----------------
+For each held-out test subject:
+- the next available subject in SUBJECT_IDS is used only for validation;
+- all remaining subjects are used for training;
+- normalization and class/positive weights use training subjects only;
+- checkpoint and transition threshold selection use validation only;
+- the held-out subject is evaluated only after the best checkpoint is loaded.
+
+11. MODEL OUTPUTS
+-----------------
+Each baseline uses ONE multi-task model with three outputs:
+1. Terrain class (8 classes)
+2. Transition presence (binary)
+3. Transition offset/time (regression)
+
+Terrain loss is masked for windows that overlap the annotated transition
+region. Transition presence is trained on all windows. Timing regression is
+trained only on positive windows containing Transition_1.
+
+12. RESULTS
+-----------
+Results are written under:
+../results_loso_multitask_2imu/
+../results_loso_multitask_1imu_shankcam/
+../results_loso_multitask_1imu_chestcam/
+
+Important files include:
+- loso_per_subject_results.csv
+- loso_summary_mean_std.csv
+- loso_summary_mean_std.json
+- loso_all_held_out_terrain_predictions.csv
+- loso_all_held_out_transition_recording_predictions.csv
+
+Each held-out subject also has its own subfolder containing training history,
+terrain predictions, transition predictions, threshold search, and metrics.
+
+13. CHECKPOINTS
+---------------
+Checkpoints are written under:
+../checkpoints_loso_multitask_2imu/
+../checkpoints_loso_multitask_1imu_shankcam/
+../checkpoints_loso_multitask_1imu_chestcam/
+
+14. IMPORTANT DATA NAMING BEHAVIOR
+----------------------------------
+The parser identifies the first valid terrain name after S<subject>_.
+Extra descriptors such as "Concrete" in "SlopeDown_Concrete" are treated as
+surface/material descriptors, not as a second terrain. A second terrain is
+recognized only when the filename contains "_to_".
+
+Examples:
+IMU_S21_SlopeDown_Concrete_Fast_T1.csv -> SlopeDown
+IMU_S21_OG_Concrete_Slow_T1.csv        -> Concrete
+IMU_S21_Concrete_to_Grass_Fast_T1.csv  -> Concrete -> Grass transition
+
+For camera matching, the code first tries the exact IMU-to-camera filename and
+then falls back to a canonical key based on subject, terrain(s), speed, and trial.
+This supports camera files with extra terrain/material descriptors such as
+SlopeDown_Concrete.
