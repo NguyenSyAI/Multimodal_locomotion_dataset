@@ -320,6 +320,43 @@ Repository figures can be displayed directly in this README.
 
 ---
 
+<p align="center">
+  <img src="figures/sensor_setup.png" width="650">
+</p>
+
+<p align="center">
+  <em>
+  Wearable sensing configuration with four bilateral lower-limb IMUs
+  and chest- and right-shank-mounted cameras.
+  </em>
+</p>
+
+## Representative experimental environments
+
+<p align="center">
+  <img src="figures/terrain_examples.png" width="850">
+</p>
+
+<p align="center">
+  <em>
+  Representative structured and natural terrains included in GMT-15,
+  including stairs, concrete, grass, sand, gravel, slopes, and terrain transitions.
+  </em>
+</p>
+
+## Dataset organization
+
+<p align="center">
+  <img src="figures/dataset_structure.png" width="850">
+</p>
+
+<p align="center">
+  <em>
+  Subject-level directory structure and multimodal file-naming convention.
+  </em>
+</p>
+
+
 ## Reproducibility
 
 Before releasing the code, ensure that:
